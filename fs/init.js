@@ -7,7 +7,10 @@ load('api_wifi.js');
 load("api_rpc.js");
 load('api_mqtt.js');
 
-let led = Cfg.get('pins.led');
+let l1 = 19;
+let l2 = 21;
+let l3 = 22;
+let l4 = 23;
 
 let getInfo = function() {
   return JSON.stringify({
@@ -17,12 +20,38 @@ let getInfo = function() {
   });
 };
 
-// Blink built-in LED every second
-GPIO.set_mode(led, GPIO.MODE_OUTPUT);
-Timer.set(1000 /* 1 sec */, Timer.REPEAT, function() {
-  let value = GPIO.toggle(led);
-  //print(value ? 'Tick' : 'Tock', 'uptime:', Sys.uptime(), getInfo());
-}, null);
+// initialize GPIO
+GPIO.set_mode(l1, GPIO.MODE_OUTPUT);
+GPIO.set_mode(l2, GPIO.MODE_OUTPUT);
+GPIO.set_mode(l3, GPIO.MODE_OUTPUT);
+GPIO.set_mode(l4, GPIO.MODE_OUTPUT);
+clearAll();
+
+function clearAll(){
+  GPIO.write(l1, 0);
+  GPIO.write(l2, 0);
+  GPIO.write(l3, 0);
+  GPIO.write(l4, 0);
+}
+
+
+RPC.addHandler('onled', function() {
+  GPIO.write(l1, 1);
+  GPIO.write(l2, 0);
+  GPIO.write(l3, 1);
+  GPIO.write(l4, 0);
+
+});
+
+RPC.addHandler('offled', function() {
+  GPIO.write(l1, 0);
+  GPIO.write(l2, 1);
+  GPIO.write(l3, 0);
+  GPIO.write(l4, 1);
+
+});
+
+
 
 function scanwifi() {
   print('>> Starting scan...');
@@ -42,21 +71,21 @@ function scanwifi() {
 
 let jsonarray = null;
 RPC.addHandler('getWifi', function() {
-Wifi.scan(function(results){
-  if (results === undefined) {
+  Wifi.scan(function(results){
+    if (results === undefined) {
       return error;
-  } else {
+    } else {
       jsonarray = results;
-  }
-});
-return jsonarray;
+    }
+  });
+  return jsonarray;
 });
 
 //scanwifi();
 Wifi.scan(function(results){
   if (results === undefined) {
-      print('!! Scan error');
-      return;
+    print('!! Scan error');
+    return;
   } else {
     for (let i = 0; i < results.length; i++) {
       print('SSID: ', results[i].ssid);

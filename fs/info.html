@@ -3,8 +3,9 @@
 <head>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<!--script type="text/javascript" src="script.js"></script-->;
 </head>
-<body onload = "fetchSSID()">
+<body>
 	<nav class="nav" tabindex="-1" onclick="this.focus()">
 		<div class="container">
 			<center><a class="pagename current" >WIFI-SETTING</a></center>
@@ -15,25 +16,19 @@
 		<br>
 		<div class='container'>
 			<div class='hero'>
-				<p id='wifimsg' >WiFi not connected</p>
-				<p id='apmsg' >Access point on</p>
+				<p id='msg' >After device reboots it will try to conect to the provided Wifi network 
+					     <br>if Successful a sta IP address will show up in display</p>
 			</div>
 			<div class="row form">
-				<div class="col c4">
-					<br><select class='input' name='ap' id='ap-dropdown' required></select>
+				<div class="col c12">
 					<br>
 					<br>
-					<br>
-					<input class='input' type='password' id='password' placeholder='              Password' name='psw' >
-					<br>
-					<br>
-					<button class="btn btn-sm btn-c" id='save'>Save WiFi and connect</button>
+					<input class='input' type='text' id='ipaddress' placeholder='        device ip address' name='psw' >
 					<br>
 					<br>
-				</div>
-				<div class="col c8">
-					<!-- <h3>Result:</h3> -->
-					<div id="result"></div>
+					<button class="btn btn-sm btn-c" id='connect'>Connect to Device using IP</button>
+					<br>
+					<br>
 				</div>
 			</div>
 		</div>
@@ -41,4 +36,9 @@
 </body>
 </html>
 <script type="text/javascript" src="zepto.min.js"></script>;
-<script type="text/javascript" src="script.js"></script>;
+<script type="text/javascript">
+		$('#connect').on('click', function() {
+			window.location.href = "http://" + $('#ipaddress').val();
+		});
+	
+</script>;
