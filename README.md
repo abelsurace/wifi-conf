@@ -2,9 +2,8 @@
 
 ## Overview
 
-Mongoose os ESP-32 wifi configuraton project allows the user to set wiffi ssid name and password from a webpage served from
-the ESP32 itself. Initially the user will have to connect to the ESP32 in Acces Point mode, it scans the available wiffi conections and display them in a drop down menu, a separate box allows the user to enter the password, once is setup this values are saved within the ESP32 allowing further conections through the same wiffi network. The application will allow to renew credentials in case the user wants to connect through a different wifi network if the client wishes to do
-so, or in case the previous selected network is no longer available.
+Mongoose OS ESP-32 Wi-Fi configuration project allows the user to set WiFi ssid name and password from a web page served from
+the ESP32 itself. Initially the user will have to connect to the ESP32 in Access Point mode SSID= Mongoose_?????? PWD= Mongoose IP: 192.168.4.1, then ESP32 scans the available WiFi connections and display them in a drop down menu, a separate box allows the user to enter the password, once is set up this values are saved within the ESP32 config and ESP32 is rebooted allowing further connections through the same WiFi network. The application will allow renewing credentials in case the user wants to connect through a different Wi-Fi network if the client wishes to do so, or in case the previous selected network is no longer available. ESP32 will remain in access point mode and Station mode simultaneously.
 
 ## How to install this app
 
