@@ -65,13 +65,13 @@
 				else {
 					$('#connection').attr('src', 'disconnected.png');
 				}
-				if (data.wifi.sta_ip != ""){
+				if (data.wifi.sta_ip !== ""){
 					$('#wifimsg').html('WiFi connected: '+ data.wifi.sta_ip + '<br> SSID Name: '+ data.wifi.ssid);
 				}
 				else {
 					$('#wifimsg').html('WiFi not connected');
 				}
-				if (data.wifi.ap_ip != ""){
+				if (data.wifi.ap_ip !== ""){
 					$('#apmsg').html('AP ready on: '+ data.wifi.ap_ip);
 				}
 				else {
@@ -84,6 +84,7 @@
 	function redirectToWifi(){
 		log('Redirecting to info...');
 		window.location.href = "/info.html";
-		$.ajax({ url: '/rpc/Sys.Reboot'});
+		setTimeout($.ajax({ url: '/rpc/Sys.Reboot'}), 3000);
 	}
+	fetchSSID();
 	setInterval(getStatus, 3000);
